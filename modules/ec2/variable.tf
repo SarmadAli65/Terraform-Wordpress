@@ -13,6 +13,10 @@ variable "private_subnet_2_id" {
   type = string
 }
 
+variable "vpc_id" {
+  type = string
+}
+
 ##### RDS configurations
 variable "rds_endpoint_ec2" {
   type = string
@@ -22,6 +26,8 @@ variable "db_password" {
   type = string
   sensitive = true
 }
+
+##### WordPress admin details
 
 variable "admin_username" {
   type = string
@@ -37,6 +43,6 @@ variable "admin_email"{
 }
 
 ###### ALB SG
-variable "alb_sg" {
+variable "alb_sg_id" {
   type = string
 }
