@@ -35,3 +35,8 @@ variable "admin_password" {
 variable "admin_email"{
   type = string
 }
+
+###### ALB SG
+variable "alb_sg" {
+  type = string
+}

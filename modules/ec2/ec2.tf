@@ -9,9 +9,9 @@ resource "aws_instance" "Wordpress-instance-1" {
         rds_user = "alisrmad"
         rds_pass = var.db_password
         rds_endpoint = var.rds_endpoint_ec2
-        admin_user = var.admin_username
-        admin_pass = var.admin_password
-        admin_email = var.admin_email
+        admin_username = var.admin_username
+        admin_password = var.admin_password
+        admin_emailaddress = var.admin_email
     })
     tags = {
       Name = "wordpress_instance_1"
