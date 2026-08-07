@@ -21,12 +21,7 @@ resource "aws_vpc_security_group_ingress_rule" "ec2_to_rds" {
   ip_protocol = "tcp"
   from_port = 3306
   to_port = 3306
-  cidr_ipv4 = "10.0.3.0/23"
-}
-
-resource "aws_vpc_security_group_egress_rule" "rds_to_ec2" {
-    security_group_id = aws_security_group.db_security_group.id
-    ip_protocol = "-1"
+  cidr_ipv4 = "10.0.2.0/23"
 }
 
 ###### RDS DB instance config

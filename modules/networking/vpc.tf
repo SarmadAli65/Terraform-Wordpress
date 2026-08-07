@@ -20,7 +20,7 @@ resource "aws_internet_gateway" "igw" {
 ###### Subnets
 resource "aws_subnet" "public-subnet-1" {
   vpc_id = aws_vpc.terraform-vpc.id
-  cidr_block = "10.0.1.0/24"
+  cidr_block = "10.0.0.0/24"
   availability_zone = var.availability_zone-1a
   tags = {
     Name = "wordpress-pubsub-1"
@@ -30,7 +30,7 @@ resource "aws_subnet" "public-subnet-1" {
 
 resource "aws_subnet" "public-subnet-2" {
   vpc_id = aws_vpc.terraform-vpc.id
-  cidr_block = "10.0.2.0/24"
+  cidr_block = "10.0.1.0/24"
   availability_zone = var.availability_zone-1b
   tags = {
     Name = "wordpress-pubsub-2"
@@ -67,7 +67,8 @@ resource "aws_eip" "eip" {
 ####### Nat Gateway
 resource "aws_nat_gateway" "terraform-ngw" {
   vpc_id = aws_vpc.terraform-vpc.id
-  availability_mode = "regional"  
+  availability_mode = "regional"
+  subnet_id = aws_subnet.public-subnet-1.id
 }
 
 resource "aws_nat_gateway_eip_association" "eip_association" {

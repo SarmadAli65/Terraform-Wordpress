@@ -1,7 +1,7 @@
 ##### EC2 Security groups
 resource "aws_security_group" "allow_alb_traffic" {
   name = "allow_alb_traffic"
-  description = "Allow all traffic from the ALB's"
+  description = "Allow all traffic from the ALBs"
   vpc_id = var.vpc_id
   tags = {
     Name = "allow_alb_traffic"
@@ -24,8 +24,8 @@ resource "aws_instance" "Wordpress-instance-1" {
     instance_type = local.instance_type
     subnet_id = var.private_subnet_1_id
     associate_public_ip_address = false
-    security_groups = [ aws_security_group.allow_alb_traffic ]
-    user_data = templatefile("${path.module}/ec2.cloud-init.yaml",{
+    security_groups = [ aws_security_group.allow_alb_traffic.name ]
+    user_data = templatefile("${path.module}/cloud-init.yaml",{
         rds_user = "alisrmad"
         rds_pass = var.db_password
         rds_endpoint = var.rds_endpoint_ec2
@@ -45,7 +45,7 @@ resource "aws_instance" "Wordpress-instance-2" {
     instance_type = local.instance_type
     subnet_id = var.private_subnet_2_id
     associate_public_ip_address = false
-    user_data = templatefile("${path.module}/ec2.cloud-init.yaml",{
+    user_data = templatefile("${path.module}/cloud-init.yaml",{
         rds_user = "alisrmad"
         rds_pass = var.db_password
         rds_endpoint = var.rds_endpoint_ec2
