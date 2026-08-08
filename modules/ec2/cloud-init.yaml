@@ -7,8 +7,7 @@ packages:
   - curl
   - apache2
 runcmd:
-  - curl -sSL https://packages.sury.org/php/README.txt | sudo bash -x
-  - sudo apt-get install php8.1 php8.1-cli php8.1-common php8.1-curl php8.1-gd php8.1-intl php8.1-mbstring php8.1-mysql php8.1-opcache php8.1-readline php8.1-xml php8.1-xsl php8.1-zip php8.1-bz2 libapache2-mod-php8.1 -y
+  - sudo apt-get install php php-cli php-common php-curl php-gd php-intl php-mbstring php-mysql php-readline php-xml php-xsl php-zip php-bz2 libapache2-mod-php -y
   - service apache2 restart
 
   # Install WordPress CLI
@@ -24,11 +23,11 @@ runcmd:
   - cd html
   - sudo rm index.html
   - sudo -u www-data wp core download
-  - sudo -u www-data wp core config --dbname='mydb' --dbuser='${rds_user}' --dbpass=”${rds_pass}” --dbhost='${rds_endpoint}' --dbprefix='wp_'
+  - sudo -u www-data wp core config --dbname='mydb' --dbuser='${rds_user}' --dbpass='${rds_pass}' --dbhost='${rds_endpoint}' --dbprefix='wp_'
   - sudo chmod -R 755 /var/www/html/wp-content
 
   # Install WordPress
-  - sudo -u www-data wp core install --url='www.sarmadcloud.work' --title='My WordPress Website' --admin_user='${admin_username}' --admin_password='${admin_password}' --admin_email='${admin_emailaddress}'
+  - sudo -u www-data wp core install --url='terraform-alb-1007051233.us-east-1.elb.amazonaws.com' --title='My WordPress Website' --admin_user='${admin_username}' --admin_password='${admin_password}' --admin_email='${admin_emailaddress}'
 
   # Allow .htaccess files
   - sudo echo -e "<Directory /var/www/html>\n    AllowOverride All\n</Directory>" >> /etc/apache2/sites-enabled/allow-htaccess.conf

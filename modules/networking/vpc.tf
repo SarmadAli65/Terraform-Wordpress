@@ -68,13 +68,15 @@ resource "aws_eip" "eip" {
 resource "aws_nat_gateway" "terraform-ngw" {
   vpc_id = aws_vpc.terraform-vpc.id
   availability_mode = "regional"
-  subnet_id = aws_subnet.public-subnet-1.id
+  tags = {
+    Name = "terraform-ngw"
+  }
 }
 
-resource "aws_nat_gateway_eip_association" "eip_association" {
-  allocation_id = aws_eip.eip.id
-  nat_gateway_id = aws_nat_gateway.terraform-ngw.id
-}
+#resource "aws_nat_gateway_eip_association" "eip_association" {
+#  allocation_id = aws_eip.eip.id
+#  nat_gateway_id = aws_nat_gateway.terraform-ngw.id  
+#}
 
 
 ###### Route tables

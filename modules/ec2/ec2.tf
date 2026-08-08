@@ -11,9 +11,15 @@ resource "aws_security_group" "allow_alb_traffic" {
 resource "aws_vpc_security_group_ingress_rule" "allow_alb_ingress" {
   security_group_id = aws_security_group.allow_alb_traffic.id
   from_port = 80
-  ip_protocol = "HTTP"
+  ip_protocol = "tcp"
   to_port = 80  
   referenced_security_group_id = var.alb_sg_id
+}
+
+resource "aws_vpc_security_group_egress_rule" "allow_alb_egress" {
+  security_group_id = aws_security_group.allow_alb_traffic.id
+  cidr_ipv4 = "0.0.0.0/0"
+  ip_protocol = "-1"
 }
 
 
@@ -24,7 +30,7 @@ resource "aws_instance" "Wordpress-instance-1" {
     instance_type = local.instance_type
     subnet_id = var.private_subnet_1_id
     associate_public_ip_address = false
-    security_groups = [ aws_security_group.allow_alb_traffic.name ]
+    security_groups = [ aws_security_group.allow_alb_traffic.id ]
     user_data = templatefile("${path.module}/cloud-init.yaml",{
         rds_user = "alisrmad"
         rds_pass = var.db_password
@@ -45,6 +51,7 @@ resource "aws_instance" "Wordpress-instance-2" {
     instance_type = local.instance_type
     subnet_id = var.private_subnet_2_id
     associate_public_ip_address = false
+    security_groups = [ aws_security_group.allow_alb_traffic.id ]
     user_data = templatefile("${path.module}/cloud-init.yaml",{
         rds_user = "alisrmad"
         rds_pass = var.db_password

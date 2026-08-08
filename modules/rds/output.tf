@@ -13,3 +13,9 @@ output "db_instance_pass" {
     value = aws_db_instance.default.password
     sensitive = true
 }
+
+output "db_subnet_groups" {
+    description = "the subnet groups of the db instances"
+    value = aws_db_subnet_group.db_subnet_groups.arn
+  
+}
