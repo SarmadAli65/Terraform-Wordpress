@@ -9,6 +9,17 @@ This repository will showcase a complete deployment of Wordpress using terraform
 - 2 Private EC2 instances
 - Application loadbalancer
 - RDS database
-- CDN
 - CloudFlare DNS
 
+## Deployment
+```
+terraform init
+terraform plan
+terraform apply
+```
+
+## Cleanup
+
+```
+terraform destroy
+```
