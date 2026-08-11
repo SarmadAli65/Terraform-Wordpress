@@ -23,3 +23,11 @@ variable "dv_password" {
   sensitive = true
 }
 
+variable "certificate_id" {
+  type = string
+  sensitive = true
+}
+
+
+
+

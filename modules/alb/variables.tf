@@ -11,6 +11,9 @@ variable "alb_subnet_2" {
 }
 
 variable "instance_ids" {
-    type = list(string)
-  
+    type = list(string) 
+}
+
+variable "certificate_arn" {
+    type = string
 }
