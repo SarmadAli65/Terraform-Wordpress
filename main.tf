@@ -79,15 +79,13 @@ module "acm" {
 
 import {
   to = module.acm.aws_acm_certificate.certification
-  id = var.certificate_id
+  id = var.import_cert_arn
 }
 
 module "cloudflare" {
   source = "./modules/cloudflare"
   domain_name = module.alb.alb_domain_name
 }
-
-
 
 
 
