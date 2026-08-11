@@ -19,3 +19,8 @@ output "db_subnet_groups" {
     value = aws_db_subnet_group.db_subnet_groups.arn
   
 }
+
+output "db_sg" {
+    description = "the security group for the rds db"
+    value = aws_security_group.db_security_group.id
+}

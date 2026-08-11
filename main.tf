@@ -49,6 +49,16 @@ module "ec2" {
 
 }
 
+resource "aws_vpc_security_group_ingress_rule" "ec2_to_rds" {
+  security_group_id = module.rds.db_sg
+  referenced_security_group_id = module.ec2.ec2_sg
+  ip_protocol = "tcp"
+  from_port = 3306
+  to_port = 3306
+  
+}
+
+
 module "rds" {
   source = "./modules/rds"
   vpc_id = module.networking.vpc_id
@@ -85,45 +95,5 @@ import {
 module "cloudflare" {
   source = "./modules/cloudflare"
   domain_name = module.alb.alb_domain_name
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-###### IAM policies - Redundant as of right now
-resource "aws_iam_policy" "rds_policy" {
-  name        = "test_policy"
-  path        = "/"
-  description = "My test policy"
-
-  # Terraform's "jsonencode" function converts a
-  # Terraform expression result to valid JSON syntax.
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action = [
-          "rds:CreateDBSubnetGroup",
-        ]
-        Effect   = "Allow"
-        Resource = "*"
-      },
-    ]
-  })
-}
-
-resource "aws_iam_user_policy_attachment" "policy_attachment" {
-  user = "sarmad"
-  policy_arn = aws_iam_policy.rds_policy.arn
 }
 
