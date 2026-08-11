@@ -43,7 +43,6 @@ resource "aws_instance" "Wordpress-instance-1" {
       Name = "wordpress_instance_1"
       auto-delete = "no"
     }
-    #### Need to do Security group to accept ALB
 }
 
 resource "aws_instance" "Wordpress-instance-2" {
@@ -64,5 +63,4 @@ resource "aws_instance" "Wordpress-instance-2" {
       Name = "wordpress_instance_2"
       auto-delete = "no"
     }
-    #### Need to do Security group to accept ALB
 }

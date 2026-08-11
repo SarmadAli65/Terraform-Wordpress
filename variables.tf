@@ -1,11 +1,11 @@
 variable "region" {
-    type = string
-    default = "us-east-1"
+  type    = string
+  default = "us-east-1"
 }
 
 ### Wordpress admin
 variable "admin_password_wordpress" {
-  type = string
+  type      = string
   sensitive = true
 }
 
@@ -19,11 +19,11 @@ variable "admin_email_wordpress" {
 
 ### RDS
 variable "dv_password" {
-  type = string
+  type      = string
   sensitive = true
 }
 
 variable "import_cert_arn" {
-  type = string
+  type      = string
   sensitive = true
 }

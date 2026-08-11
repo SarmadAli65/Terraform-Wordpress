@@ -1,9 +1,9 @@
 variable "vpc_id" {
-    type = string
+  type = string
 }
 
 variable "alb_subnet_1" {
-    type = string
+  type = string
 }
 
 variable "alb_subnet_2" {
@@ -11,9 +11,9 @@ variable "alb_subnet_2" {
 }
 
 variable "instance_ids" {
-    type = list(string) 
+  type = list(string)
 }
 
 variable "certificate_arn" {
-    type = string
+  type = string
 }

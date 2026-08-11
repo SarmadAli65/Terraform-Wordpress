@@ -3,8 +3,8 @@ variable "zone_id" {
 }
 
 variable "domain_name" {
-    type = string
-    sensitive = true
+  type      = string
+  sensitive = true
 }
 
 

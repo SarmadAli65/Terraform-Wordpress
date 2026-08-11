@@ -1,6 +1,6 @@
 ##### EC2 congiurations & networking
 locals {
-  ami = "ami-0b6d9d3d33ba97d99"
+  ami           = "ami-0b6d9d3d33ba97d99"
   instance_type = "t3.micro"
 }
 
@@ -23,7 +23,7 @@ variable "rds_endpoint_ec2" {
 }
 
 variable "db_password" {
-  type = string
+  type      = string
   sensitive = true
 }
 
@@ -34,11 +34,11 @@ variable "admin_username" {
 }
 
 variable "admin_password" {
-  type = string
+  type      = string
   sensitive = true
 }
 
-variable "admin_email"{
+variable "admin_email" {
   type = string
 }
 
