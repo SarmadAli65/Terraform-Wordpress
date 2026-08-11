@@ -1,15 +1,26 @@
+# Configure the AWS Provider
 terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
       version = "~> 6.0"
     }
+
+    cloudflare = {
+      source  = "cloudflare/cloudflare"
+      version = "~> 5"
+    }
+
   }
 }
 
-# Configure the AWS Provider
+
 provider "aws" {
   region = var.region
+}
+
+provider "cloudflare" {
+  
 }
 
 module "networking" {
@@ -55,10 +66,43 @@ module "alb" {
 
   ### EC2
   instance_ids = [ module.ec2.wordpress_instance_1_id, module.ec2.wordpress_instance_2_id ]
+
+  ### ACM cert ARN
+  certificate_arn = module.acm.cert_arn
+}
+
+module "acm" {
+  source = "./modules/acm"
+}
+
+### Imports
+
+import {
+  to = module.acm.aws_acm_certificate.certification
+  id = var.import_cert_arn
+}
+
+module "cloudflare" {
+  source = "./modules/cloudflare"
+  domain_name = module.alb.alb_domain_name
 }
 
 
-###### IAM policies
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+###### IAM policies - Redundant as of right now
 resource "aws_iam_policy" "rds_policy" {
   name        = "test_policy"
   path        = "/"

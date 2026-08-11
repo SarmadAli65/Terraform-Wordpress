@@ -8,7 +8,7 @@ resource "aws_security_group" "allow_alb_traffic" {
   }
 }
 
-resource "aws_vpc_security_group_ingress_rule" "allow_alb_ingress" {
+resource "aws_vpc_security_group_ingress_rule" "allow_alb_ingress_http" {
   security_group_id = aws_security_group.allow_alb_traffic.id
   from_port = 80
   ip_protocol = "tcp"

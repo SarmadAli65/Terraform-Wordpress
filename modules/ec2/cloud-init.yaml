@@ -27,7 +27,7 @@ runcmd:
   - sudo chmod -R 755 /var/www/html/wp-content
 
   # Install WordPress
-  - sudo -u www-data wp core install --url='terraform-alb-1007051233.us-east-1.elb.amazonaws.com' --title='My WordPress Website' --admin_user='${admin_username}' --admin_password='${admin_password}' --admin_email='${admin_emailaddress}'
+  - sudo -u www-data wp core install --url='wwww.sarmadcloud.work' --title='My WordPress Website' --admin_user='${admin_username}' --admin_password='${admin_password}' --admin_email='${admin_emailaddress}'
 
   # Allow .htaccess files
   - sudo echo -e "<Directory /var/www/html>\n    AllowOverride All\n</Directory>" >> /etc/apache2/sites-enabled/allow-htaccess.conf

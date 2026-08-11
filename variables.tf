@@ -23,3 +23,9 @@ variable "dv_password" {
   sensitive = true
 }
 
+variable "import_cert_arn" {
+  type = string
+  sensitive = true
+}
+
+
